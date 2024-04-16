@@ -12,7 +12,7 @@ interface CardProps {
 export default function Card({ data }: CardProps) {
   return (
     <>
-      <section className="flex break-inside-avoid flex-col gap-[20px] mb-[20px]">
+      <section className="flex break-inside-avoid flex-col gap-[15px] mb-[20px]">
         <Image
           src={data.image}
           alt="Image Gallery"
@@ -22,12 +22,12 @@ export default function Card({ data }: CardProps) {
         />
 
         <h1 className="text-[16px] mb-[5px]">{data.title}</h1>
-        <div className="flex gap-[5px]">
+        <div className="flex gap-[8px] items-center">
           <Image
             src="https://i.pravatar.cc/48?u=1"
             alt="Person"
-            width={40}
-            height={40}
+            width={30}
+            height={30}
             className="rounded-[50%]"
           />
           <p className="text-[14px]">{data.name}</p>
