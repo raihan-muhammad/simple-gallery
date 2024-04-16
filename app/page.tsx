@@ -3,20 +3,11 @@ import { Card, Navbar, PaddingContainer } from "@/components/common";
 import { dummyData } from "@/dummyData";
 
 export default function Home() {
-  let user: any;
-  if (typeof window !== "undefined") user = localStorage.getItem("user");
-  const userJSON = user ? JSON.parse(user) : null;
-
   return (
     <>
       <Navbar />
-      <main className="flex">
+      <main className="flex mt-[40px]">
         <PaddingContainer>
-          {userJSON && (
-            <h1 className="my-[40px] text-2xl">
-              Selamat Datang, {userJSON?.displayName}!{" "}
-            </h1>
-          )}
           <section className="columns-2 md:columns-4 gap-[20px] w-full">
             {dummyData.map((item, i) => (
               <Card key={i} data={item} />

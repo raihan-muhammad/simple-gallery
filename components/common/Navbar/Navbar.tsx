@@ -14,6 +14,7 @@ export default function Navbar({}) {
   const handleToggle = () => {
     setIsClickToggle(!isClickToggle);
   };
+
   useOutsideClick(toggleRef, handleToggle);
 
   let token: any;
@@ -60,7 +61,6 @@ export default function Navbar({}) {
               <div
                 className="flex gap-[10px] cursor-pointer"
                 onClick={handleToggle}
-                ref={toggleRef}
               >
                 <Image
                   src={userJSON?.photoURL}
@@ -72,7 +72,10 @@ export default function Navbar({}) {
                 <p>{userJSON?.displayName}</p>
               </div>
               {isClickToggle && (
-                <div className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0">
+                <div
+                  className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0"
+                  ref={toggleRef}
+                >
                   <button
                     onClick={signOut}
                     className="md:block rounded-[106px] bg-[#c5365c] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]"
