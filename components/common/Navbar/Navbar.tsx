@@ -8,13 +8,9 @@ import useOutsideClick from "@/hooks/useClickOutside";
 export default function Navbar({}) {
   const router = useRouter();
   const [isClickToggleDropdown, setIsClickToggleDropdown] = useState(false);
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState("/?category=general");
 
   const toggleRef = useRef<HTMLDivElement>(null);
-
-  const handleToggle = () => {
-    setActiveLink(""); // Clear active link when toggling menu
-  };
 
   const handleDropdown = () => {
     setIsClickToggleDropdown(!isClickToggleDropdown);
@@ -47,39 +43,39 @@ export default function Navbar({}) {
           </Link>
           <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
             <NavItem
-              href="/"
+              href="/?category=general"
               label="General"
-              active={activeLink === "/" || true}
+              active={activeLink === "/?category=general"}
               onClick={handleLinkClick}
             />
             <NavItem
-              href="/random"
+              href="/?category=random"
               label="Random"
-              active={activeLink === "/random"}
+              active={activeLink === "/?category=random"}
               onClick={handleLinkClick}
             />
             <NavItem
-              href="/onepiece"
+              href="/?category=onepiece"
               label="One Piece"
-              active={activeLink === "/onepiece"}
+              active={activeLink === "/?category=onepiece"}
               onClick={handleLinkClick}
             />
             <NavItem
-              href="/naruto"
+              href="/?category=naruto"
               label="Naruto"
-              active={activeLink === "/naruto"}
+              active={activeLink === "/?category=naruto"}
               onClick={handleLinkClick}
             />
             <NavItem
-              href="/animal"
+              href="/?category=animal"
               label="Animal"
-              active={activeLink === "/animal"}
+              active={activeLink === "/?category=animal"}
               onClick={handleLinkClick}
             />
             <NavItem
-              href="/art"
+              href="/?category=art"
               label="Art"
-              active={activeLink === "/art"}
+              active={activeLink === "/?category=art"}
               onClick={handleLinkClick}
             />
           </ul>
