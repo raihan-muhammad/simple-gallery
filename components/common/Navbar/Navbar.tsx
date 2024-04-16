@@ -4,7 +4,7 @@ import PaddingContainer from "../PaddingContainer/PaddingContainer";
 import Link from "next/link";
 import Image from "next/image";
 import useOutsideClick from "@/hooks/useClickOutside";
-
+import UploadImage from "@/assets/upload-foto.svg";
 export default function Navbar({}) {
   const router = useRouter();
   const [isClickToggleDropdown, setIsClickToggleDropdown] = useState(false);
@@ -38,7 +38,7 @@ export default function Navbar({}) {
     <nav className="py-[18px] sticky top-0 z-50 bg-white">
       <PaddingContainer>
         <div className="flex items-center justify-between h-auto w-full relative">
-          <Link href="/" className="text-[#1679AB] text-[16px] font-bold">
+          <Link href="/" className="text-[#329bd0] text-[16px] font-bold">
             Giska Cantik
           </Link>
           <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
@@ -92,13 +92,22 @@ export default function Navbar({}) {
                   height={30}
                   className="rounded-[50%]"
                 />
-                <p>{userJSON?.displayName}</p>
+                <p className="font-[500]">{userJSON?.displayName}</p>
               </div>
               {isClickToggleDropdown && (
                 <div
-                  className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0"
+                  className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0 flex flex-col gap-[10px]"
                   ref={toggleRef}
                 >
+                  <div className="md:flex items-center gap-[7px] cursor-pointer rounded-[106px] font-[600] text-[#329bd0] text-[12px] py-[13px] px-[30px]">
+                    <Image
+                      src={UploadImage}
+                      alt="Upload Image"
+                      width={20}
+                      height={20}
+                    />
+                    <p>Upload Foto</p>
+                  </div>
                   <button
                     onClick={signOut}
                     className="md:block rounded-[106px] bg-[#c5365c] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]"
