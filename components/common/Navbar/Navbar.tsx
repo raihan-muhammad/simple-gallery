@@ -1,21 +1,30 @@
-"use client";
 import { useRouter } from "next/navigation";
+import { useState, useRef } from "react";
 import PaddingContainer from "../PaddingContainer/PaddingContainer";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useState } from "react";
 import useOutsideClick from "@/hooks/useClickOutside";
 
 export default function Navbar({}) {
   const router = useRouter();
-  const [isClickToggle, setIsClickToggle] = useState(false);
+  const [isClickToggleDropdown, setIsClickToggleDropdown] = useState(false);
+  const [activeLink, setActiveLink] = useState("");
+
   const toggleRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
-    setIsClickToggle(!isClickToggle);
+    setActiveLink(""); // Clear active link when toggling menu
   };
 
-  useOutsideClick(toggleRef, handleToggle);
+  const handleDropdown = () => {
+    setIsClickToggleDropdown(!isClickToggleDropdown);
+  };
+
+  const handleLinkClick = (link: string) => {
+    setActiveLink(link); // Set active link when a link is clicked
+  };
+
+  useOutsideClick(toggleRef, handleDropdown);
 
   let token: any;
   let user: any;
@@ -37,30 +46,48 @@ export default function Navbar({}) {
             Giska Cantik
           </Link>
           <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
-            <li className="hover:text-[#074173]">
-              <Link href="/">General</Link>
-            </li>
-            <li className="hover:text-[#074173]">
-              <Link href="/">Random</Link>
-            </li>
-            <li className="hover:text-[#074173]">
-              <Link href="/">One Piece</Link>
-            </li>
-            <li className="hover:text-[#074173]">
-              <Link href="/">Naruto</Link>
-            </li>
-            <li className="hover:text-[#074173]">
-              <Link href="/">Animal</Link>
-            </li>
-            <li className="hover:text-[#074173]">
-              <Link href="/">Art</Link>
-            </li>
+            <NavItem
+              href="/"
+              label="General"
+              active={activeLink === "/" || true}
+              onClick={handleLinkClick}
+            />
+            <NavItem
+              href="/random"
+              label="Random"
+              active={activeLink === "/random"}
+              onClick={handleLinkClick}
+            />
+            <NavItem
+              href="/onepiece"
+              label="One Piece"
+              active={activeLink === "/onepiece"}
+              onClick={handleLinkClick}
+            />
+            <NavItem
+              href="/naruto"
+              label="Naruto"
+              active={activeLink === "/naruto"}
+              onClick={handleLinkClick}
+            />
+            <NavItem
+              href="/animal"
+              label="Animal"
+              active={activeLink === "/animal"}
+              onClick={handleLinkClick}
+            />
+            <NavItem
+              href="/art"
+              label="Art"
+              active={activeLink === "/art"}
+              onClick={handleLinkClick}
+            />
           </ul>
           {token ? (
             <>
               <div
-                className="flex gap-[10px] cursor-pointer"
-                onClick={handleToggle}
+                className="flex gap-[10px] cursor-pointer items-center"
+                onClick={handleDropdown}
               >
                 <Image
                   src={userJSON?.photoURL}
@@ -71,7 +98,7 @@ export default function Navbar({}) {
                 />
                 <p>{userJSON?.displayName}</p>
               </div>
-              {isClickToggle && (
+              {isClickToggleDropdown && (
                 <div
                   className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0"
                   ref={toggleRef}
@@ -97,3 +124,18 @@ export default function Navbar({}) {
     </nav>
   );
 }
+
+interface NavItemProps {
+  href: string;
+  label: string;
+  active: boolean;
+  onClick: (href: string) => void;
+}
+
+const NavItem: React.FC<NavItemProps> = ({ href, label, active, onClick }) => {
+  return (
+    <li className={active ? "font-bold" : ""} onClick={() => onClick(href)}>
+      <Link href={href}>{label}</Link>
+    </li>
+  );
+};
