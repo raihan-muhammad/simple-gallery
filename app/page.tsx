@@ -3,8 +3,9 @@ import { Card, Navbar, PaddingContainer } from "@/components/common";
 import { dummyData } from "@/dummyData";
 
 export default function Home() {
-  const user: any = localStorage.getItem("user");
-  const userJSON = JSON.parse(user);
+  let user: any;
+  if (typeof window !== "undefined") user = localStorage.getItem("user");
+  const userJSON = user ? JSON.parse(user) : null;
 
   return (
     <>

@@ -5,7 +5,8 @@ import Link from "next/link";
 
 export default function Navbar({}) {
   const router = useRouter();
-  const token = localStorage.getItem("token");
+  let token: any;
+  if (typeof window !== "undefined") token = localStorage.getItem("user");
 
   const signOut = () => {
     localStorage.clear();
