@@ -38,8 +38,8 @@ export default function Card({ data }: CardProps) {
           className="rounded-[16px] h-auto"
         />
         <div
-          className={`absolute w-full bottom-0 rounded-[16px] overflow-hidden transition-opacity transition-height duration-300 ease-in-out pt-[150px] p-[20px] bg-gradient-to-t from-black ${
-            isHovered ? "opacity-100 h-auto" : "opacity-0 h-0"
+          className={`absolute w-full bottom-0 rounded-[16px] overflow-hidden transition-opacity duration-500 ease pt-[150px] p-[20px] bg-gradient-to-t from-black ${
+            isHovered ? "opacity-100 h-auto" : "opacity-0 h-auto"
           }`}
         >
           <h1 className="text-[16px] mb-[10px] text-white">{data.title}</h1>
