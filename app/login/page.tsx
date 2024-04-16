@@ -30,19 +30,21 @@ export default function Login() {
 
   return (
     <>
-      <div className="relative py-16 bg-gradient-to-br from-sky-50 h-[100vh] to-gray-200">
+      <div className="relative flex items-center bg-gradient-to-br from-sky-50 h-[91vh] to-gray-200">
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
           <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12">
             <div className="rounded-xl bg-white shadow-xl">
               <div className="p-6 sm:p-16">
                 <div className="space-y-4">
-                  <Link href="/">Giska App (back to home)</Link>
-                  <h2 className="mb-8 text-lg text-cyan-900 font-bold">
-                    Sign in / Register in here to unlock the <br /> best of Our
-                    Gallery.
+                  <h1 className="text-2xl text-cyan-900 font-bold">
+                    Sign in / Register
+                  </h1>
+                  <h2 className="mb-8 text-lg">
+                    Let&apos;s explore our best gallery, save your special
+                    moment
                   </h2>
                 </div>
-                <div className="mt-16 grid space-y-4">
+                <div className="mt-8 grid space-y-4">
                   <button
                     className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
  hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"

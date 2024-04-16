@@ -13,7 +13,6 @@ export default function Home() {
   const filteredData = dummyData.filter((item) => item.category === search);
   return (
     <>
-      <Navbar />
       <main className="flex mt-[40px]">
         <PaddingContainer>
           {filteredData.length > 0 ? (

@@ -1,4 +1,5 @@
-import { useRouter } from "next/navigation";
+"use client";
+import { useRouter, usePathname } from "next/navigation";
 import { useState, useRef } from "react";
 import PaddingContainer from "../PaddingContainer/PaddingContainer";
 import Link from "next/link";
@@ -7,6 +8,8 @@ import useOutsideClick from "@/hooks/useClickOutside";
 import UploadImage from "@/assets/upload-foto.svg";
 export default function Navbar({}) {
   const router = useRouter();
+  const pathname = usePathname();
+
   const [isClickToggleDropdown, setIsClickToggleDropdown] = useState(false);
   const [activeLink, setActiveLink] = useState("/?category=general");
 
@@ -35,50 +38,56 @@ export default function Navbar({}) {
   };
 
   return (
-    <nav className="py-[18px] sticky top-0 z-50 bg-white">
+    <nav
+      className={`py-[18px] sticky top-0 z-50 ${
+        pathname === "/login" ? "bg-[#eef6fb]" : "bg-white"
+      }`}
+    >
       <PaddingContainer>
         <div className="flex items-center justify-between h-auto w-full relative">
           <Link href="/" className="text-[#329bd0] text-[16px] font-bold">
             Giska Cantik
           </Link>
-          <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
-            <NavItem
-              href="/?category=general"
-              label="General"
-              active={activeLink === "/?category=general"}
-              onClick={handleLinkClick}
-            />
-            <NavItem
-              href="/?category=random"
-              label="Random"
-              active={activeLink === "/?category=random"}
-              onClick={handleLinkClick}
-            />
-            <NavItem
-              href="/?category=onepiece"
-              label="One Piece"
-              active={activeLink === "/?category=onepiece"}
-              onClick={handleLinkClick}
-            />
-            <NavItem
-              href="/?category=naruto"
-              label="Naruto"
-              active={activeLink === "/?category=naruto"}
-              onClick={handleLinkClick}
-            />
-            <NavItem
-              href="/?category=animal"
-              label="Animal"
-              active={activeLink === "/?category=animal"}
-              onClick={handleLinkClick}
-            />
-            <NavItem
-              href="/?category=art"
-              label="Art"
-              active={activeLink === "/?category=art"}
-              onClick={handleLinkClick}
-            />
-          </ul>
+          {pathname !== "/login" && (
+            <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
+              <NavItem
+                href="/?category=general"
+                label="General"
+                active={activeLink === "/?category=general"}
+                onClick={handleLinkClick}
+              />
+              <NavItem
+                href="/?category=random"
+                label="Random"
+                active={activeLink === "/?category=random"}
+                onClick={handleLinkClick}
+              />
+              <NavItem
+                href="/?category=onepiece"
+                label="One Piece"
+                active={activeLink === "/?category=onepiece"}
+                onClick={handleLinkClick}
+              />
+              <NavItem
+                href="/?category=naruto"
+                label="Naruto"
+                active={activeLink === "/?category=naruto"}
+                onClick={handleLinkClick}
+              />
+              <NavItem
+                href="/?category=animal"
+                label="Animal"
+                active={activeLink === "/?category=animal"}
+                onClick={handleLinkClick}
+              />
+              <NavItem
+                href="/?category=art"
+                label="Art"
+                active={activeLink === "/?category=art"}
+                onClick={handleLinkClick}
+              />
+            </ul>
+          )}
           {token ? (
             <>
               <div
@@ -98,8 +107,12 @@ export default function Navbar({}) {
                 <div
                   className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0 flex flex-col gap-[10px]"
                   ref={toggleRef}
+                  onClick={handleDropdown}
                 >
-                  <div className="md:flex items-center gap-[7px] cursor-pointer rounded-[106px] font-[600] text-[#329bd0] text-[12px] py-[13px] px-[30px]">
+                  <Link
+                    href="/upload-photo"
+                    className="md:flex items-center gap-[7px] cursor-pointer rounded-[106px] font-[600] text-[#329bd0] text-[12px] py-[13px] px-[30px]"
+                  >
                     <Image
                       src={UploadImage}
                       alt="Upload Image"
@@ -107,7 +120,7 @@ export default function Navbar({}) {
                       height={20}
                     />
                     <p>Upload Foto</p>
-                  </div>
+                  </Link>
                   <button
                     onClick={signOut}
                     className="md:block rounded-[106px] bg-[#c5365c] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]"
@@ -118,11 +131,15 @@ export default function Navbar({}) {
               )}
             </>
           ) : (
-            <Link href="/login">
-              <button className="md:block rounded-[106px] bg-[#3c8c20] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]">
-                Login
-              </button>
-            </Link>
+            <>
+              {pathname !== "/login" && (
+                <Link href="/login">
+                  <button className="md:block rounded-[106px] bg-[#3c8c20] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]">
+                    Login
+                  </button>
+                </Link>
+              )}
+            </>
           )}
         </div>
       </PaddingContainer>
