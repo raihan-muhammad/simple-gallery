@@ -2,11 +2,26 @@
 import { useRouter } from "next/navigation";
 import PaddingContainer from "../PaddingContainer/PaddingContainer";
 import Link from "next/link";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import useOutsideClick from "@/hooks/useClickOutside";
 
 export default function Navbar({}) {
   const router = useRouter();
+  const [isClickToggle, setIsClickToggle] = useState(false);
+  const toggleRef = useRef<HTMLDivElement>(null);
+
+  const handleToggle = () => {
+    setIsClickToggle(!isClickToggle);
+  };
+  useOutsideClick(toggleRef, handleToggle);
+
   let token: any;
-  if (typeof window !== "undefined") token = localStorage.getItem("user");
+  let user: any;
+  if (typeof window !== "undefined") user = localStorage.getItem("user");
+  if (typeof window !== "undefined") token = localStorage.getItem("token");
+
+  const userJSON = user ? JSON.parse(user) : null;
 
   const signOut = () => {
     localStorage.clear();
@@ -16,7 +31,7 @@ export default function Navbar({}) {
   return (
     <nav className="py-[18px] sticky top-0 z-50 bg-white">
       <PaddingContainer>
-        <div className="flex items-center justify-between h-auto w-full">
+        <div className="flex items-center justify-between h-auto w-full relative">
           <Link href="/" className="text-[#1679AB] text-[16px] font-bold">
             Giska Cantik
           </Link>
@@ -41,12 +56,32 @@ export default function Navbar({}) {
             </li>
           </ul>
           {token ? (
-            <button
-              onClick={signOut}
-              className="md:block rounded-[106px] bg-[#c5365c] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]"
-            >
-              Logout
-            </button>
+            <>
+              <div
+                className="flex gap-[10px] cursor-pointer"
+                onClick={handleToggle}
+                ref={toggleRef}
+              >
+                <Image
+                  src={userJSON?.photoURL}
+                  alt={userJSON?.displayName}
+                  width={30}
+                  height={30}
+                  className="rounded-[50%]"
+                />
+                <p>{userJSON?.displayName}</p>
+              </div>
+              {isClickToggle && (
+                <div className="shadow-inner bg-[#f3f3f3] rounded-lg p-[20px] absolute top-[50px] right-0">
+                  <button
+                    onClick={signOut}
+                    className="md:block rounded-[106px] bg-[#c5365c] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <Link href="/login">
               <button className="md:block rounded-[106px] bg-[#3c8c20] font-[600] text-[#fff] text-[12px] py-[13px] px-[30px]">
