@@ -10,7 +10,7 @@ import {
   orderBy,
   getFirestore,
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { app } from "@/firebase"; // Make sure to import your Firebase configuration correctly
 
 export default function Home() {
@@ -46,23 +46,30 @@ export default function Home() {
 
   return (
     <main className="flex mt-[40px]">
-      <PaddingContainer>
-        {filteredData.length > 0 ? (
-          <section className="columns-2 md:columns-4 gap-[20px] w-full">
-            {filteredData.map((item, i) => (
-              <Card key={i} data={item} />
-            ))}
-          </section>
-        ) : (
-          <section className="flex w-full items-center justify-center flex-col h-[80vh] gap-[50px]">
-            <Image src={NotFound} width={200} height={200} alt="Empty State" />
-            <h1 className="text-2xl relative top-0 left-0 right-0 bottom-0 text-center">
-              Belum ada photo nih dengan category <b>{category}</b>, <br />
-              Ayoo uploud fotonya disini ehehe
-            </h1>
-          </section>
-        )}
-      </PaddingContainer>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PaddingContainer>
+          {filteredData.length > 0 ? (
+            <section className="columns-2 md:columns-4 gap-[20px] w-full">
+              {filteredData.map((item, i) => (
+                <Card key={i} data={item} />
+              ))}
+            </section>
+          ) : (
+            <section className="flex w-full items-center justify-center flex-col h-[80vh] gap-[50px]">
+              <Image
+                src={NotFound}
+                width={200}
+                height={200}
+                alt="Empty State"
+              />
+              <h1 className="text-2xl relative top-0 left-0 right-0 bottom-0 text-center">
+                Belum ada photo nih dengan category <b>{category}</b>, <br />
+                Ayoo uploud fotonya disini ehehe
+              </h1>
+            </section>
+          )}
+        </PaddingContainer>
+      </Suspense>
     </main>
   );
 }

@@ -111,7 +111,7 @@ export default function Navbar({}) {
                 >
                   <Link
                     href="/upload-photo"
-                    className="md:flex items-center gap-[7px] cursor-pointer rounded-[106px] font-[600] text-[#329bd0] text-[12px] py-[13px] px-[30px]"
+                    className="flex items-center gap-[7px] cursor-pointer rounded-[106px] font-[600] text-[#329bd0] text-[12px] py-[13px] px-[30px]"
                   >
                     <Image
                       src={UploadImage}
@@ -119,7 +119,7 @@ export default function Navbar({}) {
                       width={20}
                       height={20}
                     />
-                    <p>Upload Foto</p>
+                    <p>Upload Photo</p>
                   </Link>
                   <button
                     onClick={signOut}
