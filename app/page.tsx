@@ -63,8 +63,9 @@ export default function Home() {
                 width={200}
                 height={200}
                 alt="Empty State"
+                className="w-[150px] md:w-[200px]"
               />
-              <h1 className="text-2xl relative top-0 left-0 right-0 bottom-0 text-center">
+              <h1 className="text-md md:text-2xl relative top-0 left-0 right-0 bottom-0 text-center">
                 Belum ada photo nih dengan category <b>{category}</b>, <br />
                 Ayoo uploud fotonya disini ehehe
               </h1>

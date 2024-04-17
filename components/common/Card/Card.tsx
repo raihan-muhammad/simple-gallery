@@ -15,7 +15,6 @@ interface CardProps {
 }
 
 export default function Card({ data }: CardProps) {
-  console.log(data);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
