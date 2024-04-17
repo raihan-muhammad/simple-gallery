@@ -84,7 +84,7 @@ export default function UploadPhoto() {
         <div className="mb-4">
           <label
             htmlFor="title"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Title of your photo
           </label>
@@ -103,7 +103,7 @@ export default function UploadPhoto() {
         <div className="w-full mx-auto mb-[25px]">
           <label
             htmlFor="category"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Choose your photo category
           </label>

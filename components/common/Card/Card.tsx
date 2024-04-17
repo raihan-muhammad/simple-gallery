@@ -37,7 +37,7 @@ export default function Card({ data }: CardProps) {
           alt="Image Gallery"
           width={265}
           height={500}
-          className="rounded-[16px] h-auto"
+          className="rounded-[16px] h-auto overflow-hidden"
         />
         <div
           className={`absolute w-full bottom-0 rounded-[16px] overflow-hidden transition-opacity duration-500 ease pt-[150px] p-[20px] bg-gradient-to-t from-black ${
