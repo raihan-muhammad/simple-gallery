@@ -20,7 +20,7 @@ export default function Home() {
 
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
-  const search = category !== null ? category : "general";
+  const search = category !== null ? category : "all";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +42,9 @@ export default function Home() {
 
   console.log(posts);
 
-  const filteredData = posts.filter((item: any) => item.category === search);
+  let filteredData = posts;
+  if (search !== "all" || search === null)
+    filteredData = posts.filter((item: any) => item.category === search);
 
   return (
     <main className="flex mt-[40px]">

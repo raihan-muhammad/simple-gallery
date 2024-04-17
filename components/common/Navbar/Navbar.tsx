@@ -11,7 +11,7 @@ export default function Navbar({}) {
   const pathname = usePathname();
 
   const [isClickToggleDropdown, setIsClickToggleDropdown] = useState(false);
-  const [activeLink, setActiveLink] = useState("/?category=general");
+  const [activeLink, setActiveLink] = useState("/?category=all");
 
   const toggleRef = useRef<HTMLDivElement>(null);
 
@@ -51,9 +51,9 @@ export default function Navbar({}) {
           {pathname !== "/login" && (
             <ul className="md:flex gap-[40px] hidden items-center rounded-[96px] text-[14px] px-[24px] py-[13px]">
               <NavItem
-                href="/?category=general"
-                label="General"
-                active={activeLink === "/?category=general"}
+                href="/?category=all"
+                label="All"
+                active={activeLink === "/?category=all"}
                 onClick={handleLinkClick}
               />
               <NavItem
