@@ -4,8 +4,9 @@ import { useState } from "react";
 
 type Data = {
   id: number;
-  image: string;
-  name: string;
+  imageUrl: string;
+  user: string;
+  photoUser: string;
   title: string;
 };
 
@@ -14,6 +15,7 @@ interface CardProps {
 }
 
 export default function Card({ data }: CardProps) {
+  console.log(data);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -32,7 +34,7 @@ export default function Card({ data }: CardProps) {
         onMouseLeave={handleMouseLeave}
       >
         <Image
-          src={data.image}
+          src={data.imageUrl}
           alt="Image Gallery"
           width={265}
           height={500}
@@ -46,13 +48,13 @@ export default function Card({ data }: CardProps) {
           <h1 className="text-[16px] mb-[10px] text-white">{data.title}</h1>
           <div className="flex gap-[8px] items-center">
             <Image
-              src={`https://i.pravatar.cc/48?u=${data.id}`}
+              src={data.photoUser}
               alt="Person"
               width={30}
               height={30}
               className="rounded-[50%]"
             />
-            <p className="text-[14px] text-white">{data.name}</p>
+            <p className="text-[14px] text-white">{data.user}</p>
           </div>
         </div>
       </section>
